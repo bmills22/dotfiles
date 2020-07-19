@@ -123,3 +123,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# Add snap software to PATH
+export PATH="$PATH:/snap/bin"

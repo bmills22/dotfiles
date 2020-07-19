@@ -3,5 +3,9 @@
 - link:
     ~/.vimrc: vimrc
     ~/.zshrc: zshrc
-    ~/.vim: vim
+    ~/.vim/colors: vim/colors
+    ~/.xsessionrc: xsessionrc
+    ~/.xmobarrc: xmobarrc
+    ~/.config/picom/picom.conf: picom.conf
+    ~/.xmonad/xmonad.hs: xmonad/xmonad.hs
 
