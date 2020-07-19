@@ -6,7 +6,7 @@ import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 import XMonad.Util.SpawnOnce
 
-myTerminal = "gnome-terminal"
+myTerminal = "alacritty"
 myBorderWidth = 2
 myModMask = mod4Mask
 
@@ -34,8 +34,8 @@ myStartupHook = do
     spawnOnce "nitrogen --restore &"
     spawnOnce "picom &"
 main = do
-    xmproc <- spawnPipe "xmobar -x 1 /home/blake/.xmobarrc"
-
+    xmproc <- spawnPipe "xmobar -x 0 /home/blake/.xmobarrc"
+    
     xmonad $ defaultConfig
         { manageHook = manageDocks <+> manageHook defaultConfig
         , layoutHook = myLayout 

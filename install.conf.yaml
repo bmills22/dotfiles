@@ -1,11 +1,22 @@
+- defaults:
+    link:
+        relink: true
+
 - clean: ['~']
 
 - link:
     ~/.vimrc: vimrc
     ~/.zshrc: zshrc
-    ~/.vim/colors: vim/colors
+    ~/.vim/colors:
+        create: true
+        path:  vim/colors
     ~/.xsessionrc: xsessionrc
     ~/.xmobarrc: xmobarrc
     ~/.config/picom/picom.conf: picom.conf
     ~/.xmonad/xmonad.hs: xmonad/xmonad.hs
+    ~/.config/alacritty/alacritty.yml: 
+        create: true
+        path: alacritty.yml
 
+- shell:
+   - [git submodule update --init --recursive, Installing submodules] 
