@@ -4,12 +4,37 @@
 
 xrdb -merge .Xresources
 
-# Set up an icon tray
-stalonetray &
+
+## XMONAD STARTUP ##
+
+xrandr --output eDP-1 --mode 1920x1080 --rate 59.97
+xrandr --output DP-1 --primary --mode 1920x1080
+
+# unnecessary, but reference for future multi-monitor configs:
+# xrandr --output eDP-1 --left-of DP-1
 
 # Fire up apps
 
+# Start gnome power manager
+gnome-power-manager
+
+#kill old dropbox, start new instance
+killall dropbox
+dropbox &
+
+# Start bluetooth manager for tray
+blueman-applet &
+
+# Start xScreensaver (mostly used for logging in and out of X
 xscreensaver -no-splash &
+
+# Start pnmixer for systray
+pnmixer &
+
+# Dmenu snap app launch fix
+if [ -d "/snap/bin" ] ; then
+PATH="$PATH:/snap/bin"
+fi
 
 if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
