@@ -8,19 +8,28 @@ import System.IO
 import XMonad.Util.SpawnOnce
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.WorkspaceHistory
+import XMonad.Layout.Grid
 
+myTerminal :: String
 myTerminal = "alacritty"
+
+myBorderWidth :: Dimension
 myBorderWidth = 2
+
+myModMask :: KeyMask
 myModMask = mod4Mask
 
-myWorkspaces = ["main", "web", "code", "4", "5", "6", "7", "8", "9"]
+myBrowser :: String
+myBrowser = "google-chrome-stable"
+
+myWorkspaces = ["main", "web", "code", "media", "notes", "6", "7", "8", "9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  = "#292d3e"
 myFocusedBorderColor = "#bbc5ff"
 
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = avoidStruts (tiled ||| Mirror tiled ||| Grid ||| Full)
     where
         tiled = Tall nmaster delta ratio
 
@@ -45,7 +54,8 @@ myStartupHook = do
 myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
     where fadeAmount = 1.0
-    
+
+    -- 
 main = do
    -- xmproc <- spawnPipe "xmobar -x 0 /home/blake/.xmobarrc0"
     xmproc0 <- spawnPipe "xmobar -x 0 /home/blake/.xmobarrc"

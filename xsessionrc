@@ -31,11 +31,6 @@ xscreensaver -no-splash &
 # Start pnmixer for systray
 pnmixer &
 
-# Dmenu snap app launch fix
-if [ -d "/snap/bin" ] ; then
-PATH="$PATH:/snap/bin"
-fi
-
 if [ -x /usr/bin/nm-applet ] ; then
    nm-applet --sm-disable &
 fi

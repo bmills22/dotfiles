@@ -105,6 +105,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Make desktop and terminal load same notes
+alias joplin="joplin --profile ~/.config/joplin-desktop"
+
+# add Joplin-desktop alias (workaround for dmenu)
+alias joplin-desktop="~/.joplin/Joplin.AppImage &"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -125,3 +131,8 @@ unset __conda_setup
 
 # Add snap software to PATH
 export PATH="$PATH:/snap/bin"
+
+# load NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
