@@ -105,6 +105,10 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# vim
+#alias vim=nvim
+#alias vi=nvim
+
 # Make desktop and terminal load same notes
 alias joplin="joplin --profile ~/.config/joplin-desktop"
 

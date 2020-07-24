@@ -1,0 +1,1 @@
+/home/blake/.config/nvim/init.vim

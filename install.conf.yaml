@@ -6,10 +6,11 @@
 
 - link:
     ~/.vimrc: vimrc
+    ~/.config/nvim/init.vim: init.vim
     ~/.zshrc: zshrc
-    ~/.vim/colors:
+    ~/.nvim/colors:
         create: true
-        path:  vim/colors
+        path:  nvim/colors
     ~/.xsessionrc: xsessionrc
     ~/.xmobarrc: xmobarrc
     ~/.config/picom/picom.conf: picom.conf

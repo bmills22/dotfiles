@@ -1,24 +1,23 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'ap/vim-css-color'
+Plug 'ryanoasis/vim-devicons'
+Plug 'vimwiki/vimwiki'
 
-Plugin 'itchyny/lightline.vim'
-Plugin 'ap/vim-css-color'
-Plugin 'ryanoasis/vim-devicons'
-Plugin 'vimwiki/vimwiki'
+" Development plugins
+Plug 'prettier/vim-prettier'
+Plug 'styled-components/vim-styled-components'
+" JS plugins
+Plug 'maxmellon/vim-jsx-pretty'
+
+" Theme
 Plugin 'dracula/vim', { 'name': 'dracula' }
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 syntax on
 set tabstop=4
