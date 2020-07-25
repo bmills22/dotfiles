@@ -3,12 +3,13 @@ import qualified XMonad.StackSet as W
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.EZConfig(additionalKeys, additionalKeysP)
 import System.IO
 import XMonad.Util.SpawnOnce
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.WorkspaceHistory
 import XMonad.Layout.Grid
+import Graphics.X11.ExtraTypes.XF86
 
 myTerminal :: String
 myTerminal = "alacritty"
@@ -22,7 +23,7 @@ myModMask = mod4Mask
 myBrowser :: String
 myBrowser = "google-chrome-stable"
 
-myWorkspaces = ["main", "web", "code", "media", "notes", "6", "7", "8", "9"]
+myWorkspaces = ["main", "web", "code", "media", "notes", "chat", "7", "8", "9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -55,9 +56,30 @@ myLogHook :: X ()
 myLogHook = fadeInactiveLogHook fadeAmount
     where fadeAmount = 1.0
 
-    -- 
+myKeys :: [(String, X ())]
+myKeys =  [ 
+              ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +1.5%")
+            , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -1.5%")
+            , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")    
+
+                -- laptop bindings
+            , ("M-S-F11", spawn "lux -s 5%")
+            , ("M-S-F12", spawn "lux -a 5%")
+            --, ("M-KP_F1", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+            --, ("M-KP_F2", spawn "pactl set-sink-volume @DEFAULT_SINK@  -1.5%")
+            --, ("M-KP_F3", spawn "pactl set-sink-volume @DEFAULT_SINK@ +1.5%")
+            --, ("<XF86AudioPlay>", spawn "playerctl play-pause")    
+            --, ("<XF86AudioPrev>", spawn "playerctl previous")    
+            --, ("<XF86AudioNext>", spawn "playerctl next")    
+
+            , ("<XF86MonBrightnessUp>", spawn "lux -a 5%")    
+            , ("<XF86MonBrightnessDown>", spawn "lux -s 5%")
+            , ("M-S-z", spawn "xscreensaver-command -lock; xset dpms force off")
+            , ("M-<Print>", spawn "sleep 0.2; scrot -s")
+            , ("<Print>", spawn "scrot")
+            , ("M-p", spawn "rofi -show combi")
+            ]
 main = do
-   -- xmproc <- spawnPipe "xmobar -x 0 /home/blake/.xmobarrc0"
     xmproc0 <- spawnPipe "xmobar -x 0 /home/blake/.xmobarrc"
     xmproc1 <- spawnPipe "xmobar -x 1 /home/blake/.xmobarrc"
     xmproc2 <- spawnPipe "xmobar -x 2 /home/blake/.xmobarrc"
@@ -85,8 +107,5 @@ main = do
             normalBorderColor  = myNormalBorderColor,
             focusedBorderColor = myFocusedBorderColor
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
-        } `additionalKeys`
-        [ ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
-        , ((controlMask, xK_Print), spawn "sleep 0.2; scrot -s")
-        , ((0, xK_Print), spawn "scrot")
-        ]
+        } `additionalKeysP` myKeys
+        
