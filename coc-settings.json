@@ -1,0 +1,25 @@
+{
+    "eslint.run": "onSave",
+    "eslint.autoFixOnSave": true,
+    "eslint.filetypes": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "prettier.disableSuccessMessage": true,
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "none",
+    "prettier.eslintIntegration": true,
+    "coc.preferences.formatOnSaveFiletypes": [
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "json",
+        "javascriptreact",
+        "css",
+        "Markdown",
+        "md"
+    ]
+}

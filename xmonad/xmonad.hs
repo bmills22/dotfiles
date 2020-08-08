@@ -9,6 +9,7 @@ import XMonad.Util.SpawnOnce
 import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.WorkspaceHistory
 import XMonad.Layout.Grid
+import XMonad.Layout.ResizableTile
 import Graphics.X11.ExtraTypes.XF86
 
 myTerminal :: String
@@ -30,10 +31,10 @@ myWorkspaces = ["main", "web", "code", "media", "notes", "chat", "7", "8", "9"]
 myNormalBorderColor  = "#292d3e"
 myFocusedBorderColor = "#bbc5ff"
 
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Grid ||| Full)
+myLayout = avoidStruts (defaultTall ||| Mirror tiled ||| Grid ||| Full)
     where
         tiled = Tall nmaster delta ratio
-
+        defaultTall = ResizableTall nmaster delta ratio []
         -- The default number of windows in the master pane
         nmaster = 1
 
@@ -62,22 +63,19 @@ myKeys =  [
             , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -1.5%")
             , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")    
 
-                -- laptop bindings
-            , ("M-S-F11", spawn "lux -s 5%")
-            , ("M-S-F12", spawn "lux -a 5%")
-            --, ("M-KP_F1", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-            --, ("M-KP_F2", spawn "pactl set-sink-volume @DEFAULT_SINK@  -1.5%")
-            --, ("M-KP_F3", spawn "pactl set-sink-volume @DEFAULT_SINK@ +1.5%")
-            --, ("<XF86AudioPlay>", spawn "playerctl play-pause")    
-            --, ("<XF86AudioPrev>", spawn "playerctl previous")    
-            --, ("<XF86AudioNext>", spawn "playerctl next")    
+            , ("<XF86AudioPlay>", spawn "playerctl play-pause")    
+            , ("<XF86AudioPrev>", spawn "playerctl previous")    
+            , ("<XF86AudioNext>", spawn "playerctl next")    
 
             , ("<XF86MonBrightnessUp>", spawn "lux -a 5%")    
             , ("<XF86MonBrightnessDown>", spawn "lux -s 5%")
             , ("M-S-z", spawn "xscreensaver-command -lock; xset dpms force off")
-            , ("M-<Print>", spawn "sleep 0.2; scrot -s")
-            , ("<Print>", spawn "scrot")
+            , ("M-<Print>", spawn "flameshot screen -c")
+            , ("<Print>", spawn "flameshot gui")
             , ("M-p", spawn "rofi -show combi")
+
+            , ("M-C-j", sendMessage MirrorShrink)               -- Shrink vert window width
+            , ("M-C-k", sendMessage MirrorExpand)               -- Expand vert window width
             ]
 main = do
     xmproc0 <- spawnPipe "xmobar -x 0 /home/blake/.xmobarrc"

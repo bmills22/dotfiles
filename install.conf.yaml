@@ -5,16 +5,16 @@
 - clean: ['~']
 
 - link:
-    ~/.vimrc: vimrc
     ~/.config/nvim/init.vim: init.vim
+    ~/.config/nvim/coc-settings.json: coc-settings.json
     ~/.zshrc: zshrc
-    ~/.nvim/colors:
-        create: true
-        path:  nvim/colors
     ~/.xsessionrc: xsessionrc
     ~/.xmobarrc: xmobarrc
     ~/.config/picom/picom.conf: picom.conf
     ~/.xmonad/xmonad.hs: xmonad/xmonad.hs
+    ~/.xmonad/xpm:
+            create: true
+            path: xmonad/xpm
     ~/.config/alacritty/alacritty.yml: 
         create: true
         path: alacritty.yml
