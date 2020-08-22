@@ -109,6 +109,16 @@ source $ZSH/oh-my-zsh.sh
 #alias vim=nvim
 #alias vi=nvim
 
+#######################################################################
+# User Configuration                                                  #
+#######################################################################
+
+export PROJ="/home/blake/Workspace/Projects/"
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
 # Make desktop and terminal load same notes
 alias joplin="joplin --profile ~/.config/joplin-desktop"
 

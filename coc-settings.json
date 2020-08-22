@@ -12,6 +12,10 @@
     "prettier.singleQuote": true,
     "prettier.trailingComma": "none",
     "prettier.eslintIntegration": true,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    },
+    "emmet.showExpandedAbbreviation": false,
     "coc.preferences.formatOnSaveFiletypes": [
         "javascript",
         "typescript",
@@ -19,6 +23,7 @@
         "json",
         "javascriptreact",
         "css",
+        "scss",
         "Markdown",
         "md"
     ]

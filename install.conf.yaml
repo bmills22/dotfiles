@@ -8,6 +8,7 @@
     ~/.config/nvim/init.vim: init.vim
     ~/.config/nvim/coc-settings.json: coc-settings.json
     ~/.zshrc: zshrc
+    ~/.bash_aliases: bash_aliases
     ~/.xsessionrc: xsessionrc
     ~/.xmobarrc: xmobarrc
     ~/.config/picom/picom.conf: picom.conf
