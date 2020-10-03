@@ -20,7 +20,7 @@ gnome-power-manager
 
 #kill old dropbox, start new instance
 killall dropbox
-dropbox &
+dropbox start &
 
 # Start bluetooth manager for tray
 blueman-applet &

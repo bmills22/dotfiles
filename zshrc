@@ -146,6 +146,9 @@ unset __conda_setup
 # Add snap software to PATH
 export PATH="$PATH:/snap/bin"
 
+# Add doom emacs to PATH
+export PATH="$PATH:/$HOME/.emacs.d/bin"
+export PATH="$PATH:/$HOME/.local/bin"
 # load NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
