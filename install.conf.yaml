@@ -19,6 +19,7 @@
     ~/.config/alacritty/alacritty.yml: 
         create: true
         path: alacritty.yml
+    ~/.doom.d/config.org: doom.d/config.org
 
 - shell:
    - [git submodule update --init --recursive, Installing submodules] 

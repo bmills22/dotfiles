@@ -16,7 +16,7 @@ import XMonad.Layout.ToggleLayouts
 import Graphics.X11.ExtraTypes.XF86
 import Data.Monoid
 import XMonad.Layout.PerWorkspace ( onWorkspace )
-
+import XMonad.Hooks.EwmhDesktops
 
 myTerminal :: String
 myTerminal = "alacritty"
@@ -34,7 +34,7 @@ myBrowserTitle :: String
 myBrowserTitle = "Chrome"
 
 myWorkspaces :: [ String ]
-myWorkspaces = ["main", "emacs", "term", "chat", "vm", "6", "7", "8", "9"]
+myWorkspaces = ["main", "emacs", "chat", "vm", "5", "6", "7", "8", "9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -97,12 +97,12 @@ myManageHook = composeAll
      [ className =? "Emacs"     --> doShift ( myWorkspaces !! 1 )
      , className =? "Google-chrome"     --> doShift ( myWorkspaces !! 0 )
      -- , className =? "Alacritty" --> doShift ( myWorkspaces !! 4)
-     , className =? "Slack" --> doShift ( myWorkspaces !! 3 )
-     , className =? "discord" --> doShift ( myWorkspaces !! 3 )
-     , className =? "Signal" --> doShift ( myWorkspaces !! 3 )
+     , className =? "Slack" --> doShift ( myWorkspaces !! 2 )
+     , className =? "discord" --> doShift ( myWorkspaces !! 2 )
+     , className =? "Signal" --> doShift ( myWorkspaces !! 2 )
      , className =? "Steam"    --> doFloat
 --     , title =? "Oracle VM VirtualBox Manager"     --> doFloat
-     , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
+     , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 3 )
      -- , (className =? "Google-chrome" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , manageDocks
      ]
@@ -161,7 +161,7 @@ main = do
         { manageHook = myManageHook <+> manageHook defaultConfig
         , layoutHook = myLayout 
         , startupHook = myStartupHook
-        , handleEventHook    = handleEventHook defaultConfig <+> docksEventHook
+        , handleEventHook    = handleEventHook defaultConfig <+> docksEventHook <+> fullscreenEventHook
         , logHook = workspaceHistoryHook <+> myLogHook <+> dynamicLogWithPP xmobarPP
                         { ppOutput = \x -> hPutStrLn xmproc0 x  >> hPutStrLn xmproc1 x  >> hPutStrLn xmproc2 x
                         , ppCurrent = xmobarColor "#c3e88d" "" . wrap "[" "]" -- Current workspace in xmobar
