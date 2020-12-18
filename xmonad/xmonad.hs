@@ -34,7 +34,7 @@ myBrowserTitle :: String
 myBrowserTitle = "Chrome"
 
 myWorkspaces :: [ String ]
-myWorkspaces = ["main", "emacs", "chat", "vm", "5", "6", "7", "8", "9"]
+myWorkspaces = ["main", "code", "notes", "chat", "vm", "6", "7", "8", "9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -94,15 +94,17 @@ myManageHook = composeAll
      -- using 'doShift ( myWorkspaces !! 7)' sends program to workspace 8!
      -- I'm doing it this way because otherwise I would have to write out
      -- the full name of my workspaces.
-     [ className =? "Emacs"     --> doShift ( myWorkspaces !! 1 )
-     , className =? "Google-chrome"     --> doShift ( myWorkspaces !! 0 )
+     [
+       -- className =? "Emacs"     --> doShift ( myWorkspaces !! 2 )
+      className =? "Google-chrome"     --> doShift ( myWorkspaces !! 0 )
+     , className =? "Code"     --> doShift ( myWorkspaces !! 1 )
      -- , className =? "Alacritty" --> doShift ( myWorkspaces !! 4)
-     , className =? "Slack" --> doShift ( myWorkspaces !! 2 )
-     , className =? "discord" --> doShift ( myWorkspaces !! 2 )
-     , className =? "Signal" --> doShift ( myWorkspaces !! 2 )
+     , className =? "Slack" --> doShift ( myWorkspaces !! 3 )
+     , className =? "discord" --> doShift ( myWorkspaces !! 3 )
+     , className =? "Signal" --> doShift ( myWorkspaces !! 3 )
      , className =? "Steam"    --> doFloat
---     , title =? "Oracle VM VirtualBox Manager"     --> doFloat
-     , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 3 )
+--     , title =? " VirtualBox Manager"     --> doFloat
+     , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
      -- , (className =? "Google-chrome" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
      , manageDocks
      ]
@@ -129,6 +131,9 @@ myKeys =  [
             -- , ("C-e i", spawn "emacsclient -c -a '' --eval '(bh/punch-in)'")
             -- , ("C-e i", spawn "emacsclient -c -a '' --eval '(bh/punch-out)'")
 
+            -- vscode
+            , ("M-v", spawn "code")
+            
             -- Browser
             , ("M-C-b", spawn myBrowser)
 
