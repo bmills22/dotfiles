@@ -8,6 +8,9 @@
 * Introduction
 * Basic Config
 ** Lexical Binding
+:PROPERTIES:
+:ID:       1d9b64a8-9702-48e7-9c23-d81758848e05
+:END:
 Lexical binding for speed.
 #+BEGIN_SRC emacs-lisp
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
@@ -201,7 +204,8 @@ Additionally, autosave all org files.
 (add-to-list 'org-modules 'org-habit)
 (after! org
   (add-to-list 'org-modules 'org-checklist)
-  (add-hook! 'focus-out-hook 'org-save-all-org-buffers))
+  ;; (add-hook! 'focus-out-hook 'org-save-all-org-buffers))
+  (add-hook 'auto-save-hook 'org-save-all-org-buffers))
 #+END_SRC
 *** org-roam
 :PROPERTIES:
@@ -259,10 +263,10 @@ Note-taking package.
            :head "#+title: ${title}\n"
            :unnarrowed t)))
   (setq org-roam-dailies-capture-templates
-        '(("d" "daily" plain (function org-roam-capture--get-point) "%?"
+        '(("d" "daily" plain (function org-roam-capture--get-point) ""
            :immediate-finish t
            :file-name "dailies/%<%Y-%m-%d>"
-           :head "#+title: %<%Y-%m-%d>\n\n\n* Morning Routine\n** Gratitude\n\n1.%? \n\n** Daily Affirmation\n\n** Brain Dump\n\n\n\n* To-do List\n\n1. \n\n* Notes\n")))
+           :head "#+title: %<%Y-%m-%d>\n\n\n* Morning Routine\n** Gratitude\n\n1. \n\n** Daily Affirmation\n\n** Brain Dump\n\n\n\n* To-do List\n\n1. \n\n* Notes\n")))
   (setq org-roam-capture-ref-templates
         '(("r" "ref" plain (function org-roam-capture--get-point)
            "%?"
@@ -426,12 +430,12 @@ Load modules and capture templates. Notice ~after! org~ wraps the entire block.
                                  "* IDEA %? :IDEA:\n%U" :clock-in t :clock-resume t)
                                 ("e" "email" entry (file bmills/org-inbox-file)
                                  "* NEXT Respond to %:from\n%:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-                                ("a" "anki basic" entry (file+headline bm/my-anki-file "Dispatch Shelf")
-                                 "* %T :ANKI:\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: Mega\n:END:\n** Front\n%?\n** Back\n%x\n")
-                                ("A" "anki cloze" entry (file+headline bm/my-anki-file "Dispatch Shelf")
-                                 "* %T :ANKI:\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Mega\n:END:\n** Text\n%x\n** Extra\n")
-                                ("h" "habit" entry (file bmills/org-inbox-file)
-                                 "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
+                                ;;   ("a" "anki basic" entry (file+headline bm/my-anki-file "Dispatch Shelf")
+                                ;;    "* %T :ANKI:\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Basic\n:ANKI_DECK: Mega\n:END:\n** Front\n%?\n** Back\n%x\n")
+                                ;;   ("A" "anki cloze" entry (file+headline bm/my-anki-file "Dispatch Shelf")
+                                ;;    "* %T :ANKI:\n:PROPERTIES:\n:ANKI_NOTE_TYPE: Cloze\n:ANKI_DECK: Mega\n:END:\n** Text\n%x\n** Extra\n")
+                                ;;   ("h" "habit" entry (file bmills/org-inbox-file)
+                                ;;    "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
                                 ))
 
   ;; Org Mode - TODO Keywords
@@ -454,6 +458,7 @@ Load modules and capture templates. Notice ~after! org~ wraps the entire block.
                               ("PERSONAL" . ?P)
                               ("EMACS" . ?M)
                               ("LINUX" . ?O)
+                              ("CLIENT" . ?C)
                               ("crypt" . ?E)
                               ("NOTE" . ?n)
                               ("CANCELLED" . ?c)
@@ -884,7 +889,6 @@ reference: jethro's dotfiles.
                  (if (not org-agenda-persistent-marks) "" " (kept marked)")))))
 
 (setq org-agenda-bulk-custom-functions `((,jethro/org-agenda-bulk-process-key jethro/org-agenda-process-inbox-item)))
-
 #+END_SRC
 *** org-archive
 #+begin_src emacs-lisp
